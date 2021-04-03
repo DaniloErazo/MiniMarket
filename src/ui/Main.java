@@ -3,6 +3,8 @@ package ui;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import exceptions.DayMismatchException;
+import exceptions.IdentificationException;
 import model.Minimarket;
 
 public class Main {
@@ -10,7 +12,7 @@ public class Main {
 	public static Scanner sc = new Scanner(System.in);
 	private Minimarket minimarket;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IdentificationException, DayMismatchException {
 		Main ppal = new Main();
 		
 		int option = 0;
@@ -41,7 +43,7 @@ public class Main {
 		return option;
 	}
 	
-	public void executeOperation(int operation) {
+	public void executeOperation(int operation) throws IdentificationException, DayMismatchException {
 		
 		switch(operation) {
 		case 0:
@@ -51,6 +53,7 @@ public class Main {
 			register();
 			break;
 		case 2:
+			System.out.println("Cantidad de intentos de ingreso:" + minimarket.getAttempEntring());
 			break;
 		default:
 			System.out.println("Error, opción no válida");
@@ -58,7 +61,7 @@ public class Main {
 		}
 	}
 	
-	public void register() {
+	public void register() throws IdentificationException, DayMismatchException {
 		String idType = "";
 		long idNumber = 0;
 		boolean accepted = false;
@@ -70,6 +73,7 @@ public class Main {
 			int tmp;
 			try {
 				tmp = sc.nextInt();
+				sc.nextLine();
 				switch (tmp) {
 				case 1:
 					idType="TI";
@@ -97,8 +101,29 @@ public class Main {
 			
 		}
 		
+		boolean accepted2 = false;
+		while(!accepted2) {
+			System.out.println("Digite su número de identificación");
+			try {
+				idNumber=sc.nextLong();
+				sc.nextLine();
+				
+				if(idNumber>0) {
+					accepted2=true;
+				}else {
+					System.out.println("Recuerde que no puede digitar valores negativos");
+				}
+				
+			} catch (Exception e) {
+				System.out.println("Solo puede digitar números, verifique");
+				e.printStackTrace();
+			}
+			
+			
+		}
 		
-		
+		minimarket.addPerson(idType, idNumber, month);
+		System.out.println("¡Registro exitoso!");
 		
 		
 	}

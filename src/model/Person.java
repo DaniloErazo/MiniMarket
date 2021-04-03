@@ -4,6 +4,10 @@ public class Person {
 	private long idNumber;
 	private idType idType;
 	
+	public Person(long id, idType type) {
+		this.idNumber=id;
+		this.idType=type;
+	}
 	public long getIdNumber() {
 		return idNumber;
 	}
