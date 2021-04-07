@@ -122,8 +122,14 @@ public class Main {
 			
 		}
 		
-		minimarket.addPerson(idType, idNumber, month);
-		System.out.println("¡Registro exitoso!");
+		try {
+			minimarket.addPerson(idType, idNumber, month);
+			System.out.println("¡Registro exitoso!");
+		} catch (IdentificationException ie) {
+			System.err.println(ie.getMessage());
+		} catch (DayMismatchException dme) {
+			System.err.println(dme.getMessage());
+		}
 		
 		
 	}

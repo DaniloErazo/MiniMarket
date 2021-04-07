@@ -11,6 +11,7 @@ public class Minimarket {
 	
 	public Minimarket() {
 		people= new ArrayList<Person>();
+		attempEntring=0;
 	}
 	
 	public int getAttempEntring() {
@@ -18,6 +19,10 @@ public class Minimarket {
 	}
 	public void setAttempEntring(int attempEntring) {
 		this.attempEntring = attempEntring;
+	}
+	
+	public ArrayList<Person> getPeople(){
+		return people;
 	}
 	
 	public void addPerson(String id, long idNumber, int actualDay) throws IdentificationException, DayMismatchException {

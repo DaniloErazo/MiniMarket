@@ -5,7 +5,7 @@ package exceptions;
 
 	
 	public IdentificationException() {
-		super("No se puede registrar con el tipo de identificación ingresada (" + ") debido a las regulaciones");
+		super("No se puede registrar con el tipo de identificación ingresada debido a las regulaciones");
 	}
 
 
