@@ -16,7 +16,7 @@ public class MinimarketTest {
 	}
 	
 	public void setupScenary2() throws IdentificationException, DayMismatchException {
-		Minimarket minimarket = new Minimarket();
+		minimarket = new Minimarket();
 		minimarket.addPerson("CC", 1193029891, 2);
 		minimarket.addPerson("CE", 37035011, 2);
 		minimarket.addPerson("CC", 1085291278, 4);
@@ -58,6 +58,20 @@ public class MinimarketTest {
 		assertEquals(expected, exception.getMessage());
 		assertEquals(1, minimarket.getAttempEntring());
 		
+	}
+	
+	@Test
+	public void testAddPerson4() throws IdentificationException, DayMismatchException {
+		setupScenary2();
+		
+		Exception exception = assertThrows(DayMismatchException.class, () -> {
+			minimarket.addPerson("CC", 1193029891, 5);
+			
+	    });
+		
+		String expected = "De acuerdo a las regulaciones de circulación, no puede ingresar. El antepenúltimo digito de la identificación ingresada no coincide con el día";
+		assertEquals(expected, exception.getMessage());
+		assertEquals(4, minimarket.getAttempEntring());
 	}
 	
 	
